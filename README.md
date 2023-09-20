@@ -41,8 +41,8 @@ Yeah that's the only one for now :3
 ## Scripts Documentation
 This is a work in progress but so are the scripts!
 
-# deleteBlanks.py
+### deleteBlanks.py
 This script scans a directory for PNG images, identifies completely black ones, and deletes them.
 
-# lightnessToTransparency.py
+### lightnessToTransparency.py
 This script processes PNG images within a specified directory, calculates the lightness of each pixel, and adjusts the alpha channel accordingly to make dark pixels more transparent and light pixels more opaque through a logarithmic transformation.
