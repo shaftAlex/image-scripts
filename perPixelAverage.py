@@ -6,7 +6,7 @@ def get_png_files(directory):
     png_files = [f for f in os.listdir(directory) if f.endswith('.png')]
     return png_files
 
-# Function to combine and average images pixel-wise
+# Function to combine and average images pixel-wise, considering alpha channel
 def average_images(directory):
     image_files = get_png_files(directory)
 
@@ -14,7 +14,7 @@ def average_images(directory):
         print("No PNG images found in the specified directory.")
         return
 
-    images = [Image.open(os.path.join(directory, file)) for file in image_files]
+    images = [Image.open(os.path.join(directory, file)).convert("RGBA") for file in image_files]
 
     # Ensure all images have the same size (16x16 pixels)
     image_size = images[0].size
@@ -27,14 +27,18 @@ def average_images(directory):
     base_name = os.path.splitext(image_files[0])[0].split('-')[0]
 
     # Initialize an empty image to store the average
-    average_image = Image.new('RGB', image_size, (0, 0, 0))
+    average_image = Image.new('RGBA', image_size, (0, 0, 0, 0))
 
     # Iterate through each pixel and calculate the average across all images
     for x in range(image_size[0]):
         for y in range(image_size[1]):
             pixel_values = [img.getpixel((x, y)) for img in images]
-            average_pixel = tuple(sum(value[i] for value in pixel_values) / len(pixel_values) for i in range(3))
-            average_image.putpixel((x, y), tuple(map(int, average_pixel)))
+            # Calculate average RGB values
+            average_rgb = tuple(sum(value[i] for value in pixel_values) / len(pixel_values) for i in range(3))
+            # Calculate average alpha value
+            average_alpha = sum(value[3] for value in pixel_values) / len(pixel_values)
+            # Set the average pixel values in the resulting image
+            average_image.putpixel((x, y), tuple(map(int, average_rgb)) + (int(average_alpha),))
 
     # Create the resulting filename using the base name
     result_filename = f"{base_name}-average.png"
