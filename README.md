@@ -49,3 +49,6 @@ This script processes PNG images within a specified directory, calculates the li
 
 ### perPixelAverage.py
 This script averages a collection of PNG images in a specified directory by calculating the average pixel values. It saves the resulting averaged image in the same directory with a filename based on one of the input files.
+
+### extractSprites.py
+This script extracts non-empty 16x16 pixel sprites from PNG images in a specified directory. These extracted sprites are saved in the same directory with filenames based on the input image filenames, and a sequence number is added to each sprite's filename to differentiate them. 
