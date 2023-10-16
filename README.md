@@ -46,3 +46,6 @@ This script scans a directory for PNG images, identifies completely black ones, 
 
 ### lightnessToTransparency.py
 This script processes PNG images within a specified directory, calculates the lightness of each pixel, and adjusts the alpha channel accordingly to make dark pixels more transparent and light pixels more opaque through a logarithmic transformation.
+
+### perPixelAverage.py
+This script averages a collection of PNG images in a specified directory by calculating the average pixel values. It saves the resulting averaged image in the same directory with a filename based on one of the input files.
