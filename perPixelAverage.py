@@ -23,6 +23,9 @@ def average_images(directory):
             print("All images should have the same size (16x16 pixels).")
             return
 
+    # Extract the base name from one of the image files (e.g., "planks" from "planks-10.png")
+    base_name = os.path.splitext(image_files[0])[0].split('-')[0]
+
     # Initialize an empty image to store the average
     average_image = Image.new('RGB', image_size, (0, 0, 0))
 
@@ -31,11 +34,14 @@ def average_images(directory):
         for y in range(image_size[1]):
             pixel_values = [img.getpixel((x, y)) for img in images]
             average_pixel = tuple(sum(value[i] for value in pixel_values) / len(pixel_values) for i in range(3))
-            average_image.putpixel((x, y), tuple(map(int, average_pixel)))  # Convert the result to integers
+            average_image.putpixel((x, y), tuple(map(int, average_pixel)))
 
-    # Save the resulting image with the '-average' suffix
-    average_image.save(os.path.join(directory, 'average.png'))
-    print("Average image saved as 'average.png' in the specified directory.")
+    # Create the resulting filename using the base name
+    result_filename = f"{base_name}-average.png"
+
+    # Save the resulting image with the new filename
+    average_image.save(os.path.join(directory, result_filename))
+    print(f"Average image saved as '{result_filename}' in the specified directory.")
 
 if __name__ == "__main__":
     directory = input("Please specify the directory containing PNG images: ")
