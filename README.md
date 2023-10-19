@@ -52,3 +52,6 @@ This script averages a collection of PNG images in a specified directory by calc
 
 ### extractSprites.py
 This script extracts non-empty 16x16 pixel sprites from PNG images in a specified directory. These extracted sprites are saved in the same directory with filenames based on the input image filenames, and a sequence number is added to each sprite's filename to differentiate them. 
+
+### assembleSheet.py
+This script arranges PNG images from a specified directory into a grid, calculating the dimensions for a near-square layout, and saves the composite image in the source directory.
